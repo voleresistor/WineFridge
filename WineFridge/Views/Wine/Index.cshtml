@@ -1,0 +1,30 @@
+﻿@model List<WineFridge.Models.Wine>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Wines in Stock</h2>
+
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    
+        @foreach (var wine in Model)
+        {
+            <tr>
+                <td>@wine.Name</td>
+                <td>@wine.Description</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No wines yet!</p>
+}
+
+<p><a asp-controller="Wine" asp-action="Add">Add</a></p>
