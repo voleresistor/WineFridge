@@ -1,0 +1,46 @@
+﻿@model WineFridge.ViewModels.WineryViewModel
+@{
+    ViewData["Title"] = "Add new winery";
+}
+
+<h2>Add new winery</h2>
+
+<form asp-controller="Winery" asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Website"></label>
+        <input asp-for="Website" class="form-control" />
+        <span asp-validation-for="Website"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <input asp-for="Notes" class="form-control" />
+        <span asp-validation-for="Notes"></span>
+    </div>
+
+    <input type="submit" value="Add Winery" />
+</form>

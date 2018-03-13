@@ -11,9 +11,10 @@ using WineFridge.Data;
 namespace WineFridge.Migrations
 {
     [DbContext(typeof(WineDbContext))]
-    partial class WineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180312193358_RackAndSlow")]
+    partial class RackAndSlow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,55 +36,15 @@ namespace WineFridge.Migrations
 
                     b.Property<string>("Notes");
 
-                    b.Property<string>("Rack");
+                    b.Property<int>("Rack");
 
                     b.Property<int>("Rating");
 
-                    b.Property<string>("Slot");
-
-                    b.Property<int>("TypeID");
-
-                    b.Property<int>("WineryID");
+                    b.Property<int>("Slot");
 
                     b.HasKey("ID");
 
                     b.ToTable("Wines");
-                });
-
-            modelBuilder.Entity("WineFridge.Models.Winery", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("Website");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Wineries");
-                });
-
-            modelBuilder.Entity("WineFridge.Models.WineType", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("WineTypes");
                 });
 #pragma warning restore 612, 618
         }

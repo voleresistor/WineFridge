@@ -11,19 +11,13 @@ namespace WineFridge.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Notes { get; set; }
-
-        /*
-        public Winery Winery { get; set; }
         public int WineryID { get; set; }
-
-        public WineType Type { get; set; }
         public int TypeID { get; set; }
-        */
-
         public int Rating { get; set; }
         public bool InStock { get; set; }
         public int Count { get; set; }
-        public string Location { get; set; }
+        public string Rack { get; set; }
+        public string Slot { get; set; }
 
         public Wine() { }
 
@@ -38,11 +32,10 @@ namespace WineFridge.Models
         }
         */
 
-        public Wine(string name, bool inStock, string location)
+        public Wine(string name, bool inStock)
         {
             Name = name;
             InStock = inStock;
-            Location = location;
         }
     }
 }

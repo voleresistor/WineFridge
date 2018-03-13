@@ -11,9 +11,10 @@ using WineFridge.Data;
 namespace WineFridge.Migrations
 {
     [DbContext(typeof(WineDbContext))]
-    partial class WineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180312200212_RackAndSlot")]
+    partial class RackAndSlot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,49 +42,9 @@ namespace WineFridge.Migrations
 
                     b.Property<string>("Slot");
 
-                    b.Property<int>("TypeID");
-
-                    b.Property<int>("WineryID");
-
                     b.HasKey("ID");
 
                     b.ToTable("Wines");
-                });
-
-            modelBuilder.Entity("WineFridge.Models.Winery", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("Website");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Wineries");
-                });
-
-            modelBuilder.Entity("WineFridge.Models.WineType", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("WineTypes");
                 });
 #pragma warning restore 612, 618
         }

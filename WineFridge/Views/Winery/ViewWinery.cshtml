@@ -1,0 +1,41 @@
+﻿@model WineFridge.ViewModels.WineryViewModel
+
+@{
+    ViewData["Title"] = Model.Name + "(id: " + Model.WineryID + ")";
+}
+
+<h2>@Model.Name  (id: @Model.WineryID)</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+
+    <tr>
+        <th>Address</th>
+        <td>@Model.Address</td>
+    </tr>
+
+    <tr>
+        <th>Phone</th>
+        <td>@Model.Phone</td>
+    </tr>
+
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+
+    <tr>
+        <th>Website</th>
+        <td><a href="@Model.Website" target="_blank">@Model.Website</a></td>
+    </tr>
+
+    <tr>
+        <th>Notes</th>
+        <td>@Model.Notes</td>
+    </tr>
+</table>
+
+<p><a asp-controller="Wine" asp-action="WinesFromThisWinery" asp-route-id="@Model.WineryID">Wines from this winery</a></p>

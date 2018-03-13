@@ -11,9 +11,10 @@ using WineFridge.Data;
 namespace WineFridge.Migrations
 {
     [DbContext(typeof(WineDbContext))]
-    partial class WineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180313152501_WineFridge0_3")]
+    partial class WineFridge0_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,8 +65,6 @@ namespace WineFridge.Migrations
                     b.Property<string>("Notes");
 
                     b.Property<string>("Phone");
-
-                    b.Property<string>("Website");
 
                     b.HasKey("ID");
 

@@ -1,0 +1,15 @@
+﻿@model WineFridge.ViewModels.AddBottleViewModel
+@{
+    ViewData["Title"] = "Add a bottle to the fridge";
+}
+
+<h2>Add a bottle</h2>
+
+<form asp-controller="Wine" asp-action="AddBottle" method="post">
+    <div>
+        <label asp-for="WineID"></label>
+        <select asp-for="WineID" asp-items="Model.Wines"></select>
+    </div>
+
+    <input type="submit" value="Add Bottle" />
+</form>

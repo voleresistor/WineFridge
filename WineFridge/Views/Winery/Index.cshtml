@@ -1,0 +1,30 @@
+﻿@model List<WineFridge.ViewModels.WineryViewModel>
+@{
+    ViewData["Title"] = "Wineries";
+}
+
+<h2>Wineries</h2>
+
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+        </tr>
+    
+        @foreach (var w in Model)
+        {
+            <tr>
+                <td><a asp-controller="Winery" asp-action="ViewWinery" asp-route-id="@w.WineryID">@w.Name</a></td>
+                <td>@w.Address</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No wineries in the database!</p>
+}
+
+<p><a asp-controller="Winery" asp-action="Add">Add</a></p>

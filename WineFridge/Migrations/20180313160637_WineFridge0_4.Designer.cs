@@ -11,9 +11,10 @@ using WineFridge.Data;
 namespace WineFridge.Migrations
 {
     [DbContext(typeof(WineDbContext))]
-    partial class WineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180313160637_WineFridge0_4")]
+    partial class WineFridge0_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

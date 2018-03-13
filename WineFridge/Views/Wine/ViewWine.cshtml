@@ -1,0 +1,52 @@
+﻿@model WineFridge.ViewModels.WineViewModel
+
+@{
+    ViewData["Title"] = Model.Name + " (id:" + Model.WineID + ")";
+}
+
+<h2>@Model.Name (id: @Model.WineID)</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Type</th>
+        <td>@Model.Type.Name</td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <th>Winery</th>
+        <td><a asp-controller="Winery" asp-action="ViewWinery" asp-route-id="@Model.Winery.ID">@Model.Winery.Name</a></td>
+    </tr>
+    <tr>
+        <th>Notes</th>
+        <td>@Model.Notes</td>
+    </tr>
+    <tr>
+        <th>Rating</th>
+        <td>@Model.Rating</td>
+    </tr>
+    @if (Model.InStock)
+    {
+        <tr>
+            <th>Location</th>
+            <td>@Model.Rack  - @Model.Slot</td>
+        </tr>
+        <tr>
+            <th>Count</th>
+            <td>@Model.Count</td>
+        </tr>
+    }
+</table>
+
+@if (!Model.InStock)
+{
+    <p>Sorry, this wine is not currently in stock.</p>
+}
+
+<p><a asp-controller="Wine" asp-action="Edit" asp-route-id="@Model.WineID">Edit</a> | <a asp-controller="Wine" asp-action="Index">Return</a></p>
