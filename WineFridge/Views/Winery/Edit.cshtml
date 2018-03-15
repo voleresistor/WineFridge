@@ -1,0 +1,47 @@
+﻿@model WineFridge.ViewModels.WineryViewModel
+@{
+    ViewData["Title"] = "Edit winery " + @Model.Name;
+}
+
+<h2>Edit winery: @Model.Name</h2>
+
+<form asp-controller="Winery" asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input class="form-control" asp-for="Address" />
+        <span asp-validation-for="Address"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Website"></label>
+        <input class="form-control" asp-for="Website" />
+        <span asp-validation-for="Website"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <input class="form-control" asp-for="Notes" />
+        <span asp-validation-for="Notes"></span>
+    </div>
+
+    <input type="hidden" asp-for="WineryID" value="@Model.WineryID" />
+    <input type="submit" value="Edit Winery" />
+</form>

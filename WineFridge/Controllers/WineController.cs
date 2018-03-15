@@ -200,5 +200,9 @@ namespace WineFridge.Controllers
 
             return View(wines);
         }
+
+        //TODO: Add remove from all wine list
+        //TODO: Add bottle rack/slot tracking to in stock wines
+        //TODO: Add ability to "drink" botle from in stock
     }
 }

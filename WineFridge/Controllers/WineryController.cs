@@ -67,6 +67,43 @@ namespace WineFridge.Controllers
             return View(nw);
         }
 
+        public IActionResult Edit(int id)
+        {
+            Winery winery = context.Wineries.SingleOrDefault(wn => wn.ID == id);
+            WineryViewModel editWinery = new WineryViewModel
+            {
+                Name = winery.Name,
+                Address = winery.Address,
+                Email = winery.Email,
+                Phone = winery.Phone,
+                Notes = winery.Notes,
+                Website = winery.Website,
+                WineryID = winery.ID
+            };
+
+            return View(editWinery);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(WineryViewModel winery)
+        {
+            Winery editWinery = context.Wineries.SingleOrDefault(wn => wn.ID == winery.WineryID);
+            if (editWinery != null)
+            {
+                editWinery.Name = winery.Name;
+                editWinery.Address = winery.Address;
+                editWinery.Email = winery.Email;
+                editWinery.Notes = winery.Notes;
+                editWinery.Phone = winery.Phone;
+                editWinery.Website = winery.Website;
+
+                context.SaveChanges();
+                return Redirect("/Winery/ViewWinery/" + winery.WineryID);
+            }
+
+            return View(winery);
+        }
+
         public IActionResult ViewWinery(int id)
         {
             Winery winery = context.Wineries.Single(w => w.ID == id);
@@ -84,5 +121,7 @@ namespace WineFridge.Controllers
 
             return View(wvm);
         }
+
+        //TODO: Add remove option
     }
 }

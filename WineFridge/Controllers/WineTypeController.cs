@@ -58,5 +58,9 @@ namespace WineFridge.Controllers
 
             return View(nt);
         }
+
+        //TODO: Add view with list of associated wines
+        //TODO: Add edit option
+        //TODO: Add remove option
     }
 }
