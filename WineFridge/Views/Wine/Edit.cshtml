@@ -42,6 +42,11 @@
         <span asp-validation-for="Rating"></span>
     </div>
 
+    <div>
+        <a asp-controller="Wine" asp-action="Remove" asp-route-id="@Model.WineID" onclick="return confirm('Really remove this wine from the database?')">Remove wine</a>
+    </div>
+
+    <br />
     <input type="hidden" asp-for="WineID" value="@Model.WineID" />
     <input type="submit" value="Edit Wine" />
 </form>

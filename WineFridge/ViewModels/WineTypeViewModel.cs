@@ -4,7 +4,7 @@ namespace WineFridge.ViewModels
 {
     public class WineTypeViewModel
     {
-        public int TypeId { get; set; }
+        public int TypeID { get; set; }
 
         [Required]
         [Display(Name = "Wine Type")]

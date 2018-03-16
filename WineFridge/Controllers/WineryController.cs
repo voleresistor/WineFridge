@@ -122,6 +122,34 @@ namespace WineFridge.Controllers
             return View(wvm);
         }
 
-        //TODO: Add remove option
+        public IActionResult Remove(int id)
+        {
+            Winery winery = context.Wineries.Single(wn => wn.ID == id);
+
+            if (winery != null)
+            {
+                context.Wineries.Remove(winery);
+                context.SaveChanges();
+
+                return Redirect("/Winery");
+            }
+
+            return Redirect("/Winery/ViewWinery/" + id);
+        }
+
+        public IActionResult WinesFromThisWinery(int id)
+        {
+            List<Wine> wineList = context.Wines.Where(w => w.WineryID == id).ToList();
+            Winery winery = context.Wineries.SingleOrDefault(wn => wn.ID == id);
+
+            if (winery != null)
+            {
+                // TODO: Continue implementing these views and methods
+                WineListViewModel wines = new WineListViewModel(wineList, winery);
+                return View(wines);
+            }
+
+            return Redirect("/Winery");
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model WineFridge.ViewModels.WineTypeViewModel
+@{
+    ViewData["Title"] = "Edit wine type " + @Model.Name;
+}
+
+<h2>Edit wine type: @Model.Name</h2>
+
+<form asp-controller="WineType" asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input class="form-control" asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div>
+        <a asp-controller="WineType" asp-action="Remove" asp-route-id="@Model.TypeID" onclick="return confirm('Really remove this wine type from the database?')">Remove wine type</a>
+    </div>
+
+    <br />
+    <input type="hidden" asp-for="TypeID" value="@Model.TypeID" />
+    <input type="submit" value="Edit Wine" />
+</form>

@@ -191,17 +191,21 @@ namespace WineFridge.Controllers
             return View();
         }
 
-        public IActionResult WinesFromThisWinery(int id)
+        public IActionResult Remove (int id)
         {
-            List<Wine> wineList = context.Wines.Where(w => w.WineryID == id).ToList();
-            Winery winery = context.Wineries.SingleOrDefault(wn => wn.ID == id);
+            Wine wine = context.Wines.Single(w => w.ID == id);
 
-            WinesFromThisWineryViewModel wines = new WinesFromThisWineryViewModel(wineList, winery);
+            if (wine != null)
+            {
+                context.Wines.Remove(wine);
+                context.SaveChanges();
 
-            return View(wines);
+                return Redirect("/Wine/ViewAll");
+            }
+
+            return Redirect("/Wine/ViewWine/" + id);
         }
 
-        //TODO: Add remove from all wine list
         //TODO: Add bottle rack/slot tracking to in stock wines
         //TODO: Add ability to "drink" botle from in stock
     }

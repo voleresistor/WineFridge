@@ -28,7 +28,8 @@ namespace WineFridge.Controllers
                 wineTypesVm.Add(new WineTypeViewModel
                 {
                     Name = wt.Name,
-                    Description = wt.Description
+                    Description = wt.Description,
+                    TypeID = wt.ID
                 });
             }
             return View(wineTypesVm);
@@ -57,6 +58,74 @@ namespace WineFridge.Controllers
             }
 
             return View(nt);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            WineType wineType = context.WineTypes.SingleOrDefault(wt => wt.ID == id);
+
+            if (wineType != null)
+            {
+                WineTypeViewModel wt = new WineTypeViewModel
+                {
+                    Name = wineType.Name,
+                    Description = wineType.Description,
+                    TypeID = wineType.ID
+                };
+
+                return View(wt);
+            }
+
+            return Redirect("/WineType");
+        }
+
+        [HttpPost]
+        public IActionResult Edit (WineTypeViewModel wineType)
+        {
+            if (ModelState.IsValid)
+            {
+                WineType editType = context.WineTypes.SingleOrDefault(wt => wt.ID == wineType.TypeID);
+                if (editType != null)
+                {
+                    editType.Name = wineType.Name;
+                    editType.Description = wineType.Description;
+
+                    context.SaveChanges();
+                    return Redirect("/WineType/View/" + wineType.TypeID);
+                };
+            }
+
+            return View(wineType);
+        }
+
+        public IActionResult ViewType(int id)
+        {
+            WineType wineType = context.WineTypes.SingleOrDefault(wt => wt.ID == id);
+
+            if (wineType != null)
+            {
+                WineTypeViewModel wt = new WineTypeViewModel
+                {
+                    Name = wineType.Name,
+                    Description = wineType.Description,
+                    TypeID = wineType.ID
+                };
+
+                return View(wt);
+            }
+
+            return Redirect("/WineType");
+        }
+
+        public IActionResult WinesOfThisType(int id)
+        {
+            WineType wineType = context.WineTypes.SingleOrDefault(wt => wt.ID == id);
+            IList<Wine> wines = context.Wines.Where(w => w.TypeID == id).ToList();
+
+            if (wineType != null)
+            {
+
+            }
         }
 
         //TODO: Add view with list of associated wines
