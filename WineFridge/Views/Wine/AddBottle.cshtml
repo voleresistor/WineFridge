@@ -11,5 +11,10 @@
         <select asp-for="WineID" asp-items="Model.Wines"></select>
     </div>
 
+    <div>
+        <label asp-for="RackID"></label>
+        <select asp-for="RackID" asp-items="Model.RackLocations"></select>
+    </div>
+
     <input type="submit" value="Add Bottle" />
 </form>

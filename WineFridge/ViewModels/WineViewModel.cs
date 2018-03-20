@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using WineFridge.Models;
 
 namespace WineFridge.ViewModels
@@ -28,22 +30,19 @@ namespace WineFridge.ViewModels
         [Display(Name = "Wine Type")]
         public int TypeID { get; set; }
 
-        [Display(Name = "Rack")]
-        public string Rack { get; set; }
-
-        [Display(Name = "Slot")]
-        public string Slot { get; set; }
-
-        [Required]
-        [Display(Name = "Wine Rating (1-5)")]
-        [Range(1, 5, ErrorMessage = "Please enter a rating between 1 and 5")]
+        [Display(Name = "Rating")]
         public int Rating { get; set; }
+        public string RatingTxt { get; set; }
 
         [Display(Name = "Number of bottles")]
         public int Count { get; set; }
 
+        public RackLocation Location { get; set; }
+
         public List<SelectListItem> Wineries { get; set; }
         public List<SelectListItem> Types { get; set; }
+
+        public List<SelectListItem> Ratings { get; set; }
 
         public WineViewModel() { }
 
@@ -51,6 +50,7 @@ namespace WineFridge.ViewModels
         {
             Wineries = new List<SelectListItem>();
             Types = new List<SelectListItem>();
+            Ratings = new List<SelectListItem>();
 
             foreach (Winery w in wineries)
             {
@@ -69,6 +69,14 @@ namespace WineFridge.ViewModels
                     Text = t.Name
                 });
             }
+
+            Ratings = Enum.GetValues(typeof(WineRatings)).Cast<WineRatings>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
+
+            Ratings.Reverse();
         }
     }
 }

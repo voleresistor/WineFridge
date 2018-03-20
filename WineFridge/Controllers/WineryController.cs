@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using WineFridge.Data;
 using WineFridge.Models;
 using WineFridge.ViewModels;
@@ -139,12 +139,11 @@ namespace WineFridge.Controllers
 
         public IActionResult WinesFromThisWinery(int id)
         {
-            List<Wine> wineList = context.Wines.Where(w => w.WineryID == id).ToList();
             Winery winery = context.Wineries.SingleOrDefault(wn => wn.ID == id);
 
             if (winery != null)
             {
-                // TODO: Continue implementing these views and methods
+                List<Wine> wineList = context.Wines.Where(w => w.WineryID == id).ToList();
                 WineListViewModel wines = new WineListViewModel(wineList, winery);
                 return View(wines);
             }

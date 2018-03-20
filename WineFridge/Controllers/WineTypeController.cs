@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WineFridge.Data;
 using WineFridge.Models;
@@ -91,7 +89,7 @@ namespace WineFridge.Controllers
                     editType.Description = wineType.Description;
 
                     context.SaveChanges();
-                    return Redirect("/WineType/View/" + wineType.TypeID);
+                    return Redirect("/WineType/ViewType/" + wineType.TypeID);
                 };
             }
 
@@ -120,16 +118,30 @@ namespace WineFridge.Controllers
         public IActionResult WinesOfThisType(int id)
         {
             WineType wineType = context.WineTypes.SingleOrDefault(wt => wt.ID == id);
-            IList<Wine> wines = context.Wines.Where(w => w.TypeID == id).ToList();
 
             if (wineType != null)
             {
-
+                List<Wine> wineList = context.Wines.Where(w => w.TypeID == id).ToList();
+                WineListViewModel wines = new WineListViewModel(wineList, wineType);
+                return View(wines);
             }
+
+            return Redirect("/WineType");
         }
 
-        //TODO: Add view with list of associated wines
-        //TODO: Add edit option
-        //TODO: Add remove option
+        public IActionResult Remove(int id)
+        {
+            WineType wineType = context.WineTypes.SingleOrDefault(wt => wt.ID == id);
+
+            if (wineType != null)
+            {
+                context.WineTypes.Remove(wineType);
+                context.SaveChanges();
+
+                return Redirect("/WineType");
+            }
+
+            return Redirect("/WineType/ViewType/" + id);
+        }
     }
 }

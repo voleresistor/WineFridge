@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using WineFridge.Models;
 
 namespace WineFridge.ViewModels
@@ -8,23 +10,30 @@ namespace WineFridge.ViewModels
     {
         public int WineID { get; set; }
         public List<SelectListItem> Wines { get; set; }
+        public int RackID { get; set; }
+        public List<SelectListItem> RackLocations { get; set; }
 
         public AddBottleViewModel() { }
 
-        public AddBottleViewModel(List<Wine> wineList)
+        public AddBottleViewModel(List<Wine> wineList, List<RackLocation> rackLocations)
         {
-            List<SelectListItem> wines = new List<SelectListItem>();
+            List<SelectListItem> Wines = new List<SelectListItem>();
+            List<SelectListItem> RackLocations = new List<SelectListItem>();
 
             foreach (Wine w in wineList)
             {
-                wines.Add(new SelectListItem
+                Wines.Add(new SelectListItem
                 {
                     Value = w.ID.ToString(),
                     Text = w.Name
                 });
             }
 
-            Wines = wines;
+            RackLocations = Enum.GetValues(typeof(RackCode)).Cast<RackCode>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
         }
     }
 }

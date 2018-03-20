@@ -16,7 +16,7 @@
         @foreach (var wt in Model)
         {
             <tr>
-                <td><a asp-controller="WineType" asp-action="Edit" asp-route-id="@wt.TypeID">@wt.Name</a></td>
+                <td><a asp-controller="WineType" asp-action="ViewType" asp-route-id="@wt.TypeID">@wt.Name</a></td>
                 <td>@wt.Description</td>
             </tr>
         }

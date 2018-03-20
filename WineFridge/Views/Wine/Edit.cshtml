@@ -38,7 +38,7 @@
 
     <div class="form-group">
         <label asp-for="Rating"></label>
-        <input class="form-control" asp-for="Rating" />
+        <select asp-for="Rating" asp-items="Model.Ratings"></select>
         <span asp-validation-for="Rating"></span>
     </div>
 

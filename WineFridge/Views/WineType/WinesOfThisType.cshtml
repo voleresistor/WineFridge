@@ -1,10 +1,10 @@
-﻿@model WineFridge.ViewModels.WinesFromThisWineryViewModel
+﻿@model WineFridge.ViewModels.WineListViewModel
 
 @{
-    ViewData["Title"] = "Wines from" + Model.Winery.Name;
+    ViewData["Title"] = "Wines of type" + Model.WineType.Name;
 }
 
-<h2>Wines from @Model.Winery.Name</h2>
+<h2>Wines of type @Model.WineType.Name</h2>
 
 @if (Model.Wines.Count > 0)
 {

@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <th>Type</th>
-        <td>@Model.Type.Name</td>
+        <td><a asp-controller="WineType" asp-action="WinesOfThisType" asp-route-id="@Model.Type.ID">@Model.Type.Name</a></td>
     </tr>
     <tr>
         <th>Description</th>
@@ -29,13 +29,13 @@
     </tr>
     <tr>
         <th>Rating</th>
-        <td>@Model.Rating</td>
+        <td>@Model.RatingTxt</td>
     </tr>
     @if (Model.InStock)
     {
         <tr>
             <th>Location</th>
-            <td>@Model.Rack  - @Model.Slot</td>
+            <td>@Model.Location.RackID</td>
         </tr>
         <tr>
             <th>Count</th>

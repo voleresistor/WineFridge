@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using WineFridge.Data;
@@ -34,7 +34,8 @@ namespace WineFridge.Controllers
                     Type = context.WineTypes.Single(t => t.ID == w.TypeID),
                     Rating = w.Rating,
                     Count = w.Count,
-                    InStock = w.InStock
+                    InStock = w.InStock,
+                    Location = context.RackLocations.First(l => l.WineID == w.ID)
                 });
             }
 
@@ -66,7 +67,7 @@ namespace WineFridge.Controllers
                 context.Wines.Add(newWine);
                 context.SaveChanges();
 
-                return Redirect("/Wine");
+                return Redirect("/Wine/ViewAll");
             }
 
             return View(newWineModel);
@@ -132,6 +133,8 @@ namespace WineFridge.Controllers
                 InStock = wine.InStock
             };
 
+            viewWine.RatingTxt = Enum.GetName(typeof(WineRatings), viewWine.Rating);
+
             TryValidateModel(viewWine);
             if (ModelState.IsValid)
             {
@@ -167,16 +170,24 @@ namespace WineFridge.Controllers
         public IActionResult AddBottle()
         {
             List<Wine> wineList = context.Wines.ToList();
-            return View(new AddBottleViewModel(wineList));
+            List<RackLocation> racks = context.RackLocations.ToList();
+            return View(new AddBottleViewModel(wineList, racks));
         }
 
         [HttpPost]
         public IActionResult AddBottle(AddBottleViewModel addTo)
         {
             Wine wine = context.Wines.SingleOrDefault(w => w.ID == addTo.WineID);
+            RackLocation location = new RackLocation
+            {
+                RackID = addTo.RackID,
+                WineID = addTo.WineID
+            };
+
             if (wine != null)
             {
                 wine.Count += 1;
+                context.RackLocations.Add(location);
 
                 if (!wine.InStock)
                 {
